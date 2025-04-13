@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Request Authority{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Request Authority</h2>
+
+    <form action="/request_authority" method="POST" enctype="multipart/form-data">
+        <!-- Title -->
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title" placeholder="Enter your title" required>
+        </div>
+
+        <!-- Category -->
+        <div class="mb-3">
+            <label for="category" class="form-label">Title</label>
+            <select class="form-control" id="category" name="category" required>
+                <option value="undergrad">Undergrad</option>
+                <option value="graduate">Graduate</option>
+                <option value="phd">PhD</option>
+                <option value="postdoc">Postdoc</option>
+                <option value="masters">Master's</option>
+                <option value="doctoral_student">Doctoral Student</option>
+                <option value="researcher">Researcher</option>
+                <option value="alumni">Alumni</option>
+                <option value="professor">Professor</option>
+                <option value="lecturer">Lecturer</option>
+            </select>
+        </div>
+
+        <!-- Details -->
+        <div class="mb-3">
+            <label for="details" class="form-label">Details</label>
+            <textarea class="form-control" id="details" name="details" rows="5" required placeholder="Enter details"></textarea>
+        </div>
+
+        <!-- Resume Upload -->
+        <div class="mb-3">
+            <label for="resume" class="form-label">Resume (PDF, DOCX, or TXT)</label>
+            <input type="file" class="form-control" id="resume" name="resume" accept=".pdf,.docx,.txt" required>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">Submit Request</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

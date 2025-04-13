@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Register - FastAPI App{% endblock %}
+
+{% block content %}
+<h2 class="mb-4 text-center">Register</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" name="email" id="email" placeholder="Enter email" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" name="password" id="password" placeholder="Enter password" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="password_confirm" class="form-label">Confirm Password</label>
+        <input type="password" class="form-control" name="password_confirm" id="password_confirm" placeholder="Confirm password" required>
+    </div>
+
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <button type="submit" class="btn btn-primary w-100">Register</button>
+</form>
+{% endblock %}

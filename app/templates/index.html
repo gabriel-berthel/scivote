@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}Enhanced Search Engine{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3 sidebar">
+            <button class="btn btn-danger mt-4 mb-4 w-100" id="resetSlidersBtn" onclick="resetSliders()">Reset Filters</button>
+
+            {% set sliders = [
+                ('baseScoreWeight', 'Base Score Weight', 0, 1, 0.1, 1.0),
+                ('recency', 'Recency', -1, 1, 0.1, 0.0),
+                ('authority', 'Authority', -1, 1, 0.1, 0.0),
+                ('truthworthiness', 'Truthworthiness', -1, 1, 0.1, 0.0),
+                ('sentiment', 'Neutrality', -1, 1, 0.1, 0.0),
+                ('conciseness', 'Conciseness', -1, 1, 0.1, 0.0),
+                ('readability', 'Readability', -1, 1, 0.1, 0.0),
+                ('transparency', 'Transparency', -1, 1, 0.1, 0.0)
+            ] %}
+
+            {% for id, label, min, max, step, value in sliders %}
+            <div class="slider-section">
+                <h5>{{ label }}</h5>
+                <input type="range" class="form-range" id="{{ id }}Slider" min="{{ min }}" max="{{ max }}" step="{{ step }}" value="{{ value }}" oninput="filterResults()">
+                <small>{{ label }}: <span id="{{ id }}Value">{{ value if id != 'sentiment' else 'Neutral' }}</span></small>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-9 result-container">
+            <div class="search-container card">
+                <div class="card-body">
+                    <div class="mb-3" id="searchWrapper" style="position: relative;">
+                        <input type="text" class="form-control form-control-lg" placeholder="🔍 Search for articles..." id="searchBar" value="{{ search_query }}" />
+                    </div>
+                    
+                    <div class="category-container d-flex justify-content-between align-items-center flex-wrap gap-3">
+                        <div>
+                            <label for="category_filter" class="form-label">Article category</label>
+                            <select id="category_filter" class="form-select" onchange="filterResults()">
+                                <option value="">All categories</option>
+                                <option value="astro-ph">Astrophysics</option>
+                                <option value="cond-mat">Condensed Matter</option>
+                                <option value="cs">Computer Science</option>
+                                <option value="econ">Economics</option>
+                                <option value="eess">Electrical Engineering and Systems Science</option>
+                                <option value="gr-qc">General Relativity and Quantum Cosmology</option>
+                                <option value="hep-ex">High Energy Physics - Experiment</option>
+                                <option value="hep-lat">High Energy Physics - Lattice</option>
+                                <option value="hep-ph">High Energy Physics - Phenomenology</option>
+                                <option value="hep-th">High Energy Physics - Theory</option>
+                                <option value="math-ph">Mathematical Physics</option>
+                                <option value="math">Mathematics</option>
+                                <option value="nlin">Nonlinear Sciences</option>
+                                <option value="nucl-ex">Nuclear Experiment</option>
+                                <option value="nucl-th">Nuclear Theory</option>
+                                <option value="physics">Physics</option>
+                                <option value="q-bio">Quantitative Biology</option>
+                                <option value="q-fin">Quantitative Finance</option>
+                                <option value="quant-ph">Quantum Physics</option>
+                                <option value="stat">Statistics</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="numResultsSelect" class="form-label">Number of Results</label>
+                            <select id="numResultsSelect" class="form-select" onchange="filterResults()">
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="loadingText" style="display: none; text-align: center;" role="status">
+                <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" aria-hidden="true"></div>
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        
+            <!-- Results Area -->
+            <div id="resultContainer" class="mt-4">
+                
+                <!-- Results injected via JS -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', path='js/search.js') }}"></script>
+{% endblock %}

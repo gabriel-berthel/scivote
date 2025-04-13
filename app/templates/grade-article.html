@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Grade Article{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <h2 class="mb-4 text-center">Grade Article: {{ article.id }}</h2>
+
+  <form method="post" action="/grade/{{ article.id }}">
+    
+    <div class="mb-3">
+      <label for="authority_score" class="form-label">Authority</label>
+      <input type="range" class="form-range" id="authority_score" name="authority_score" min="-1" max="1" step="0.25" value="0">
+      <small>Authority: <span id="authority_score_value">0</span></small>
+    </div>
+
+    <div class="mb-3">
+      <label for="truthworthiness_score" class="form-label">Truthworthiness</label>
+      <input type="range" class="form-range" id="truthworthiness_score" name="truthworthiness_score" min="-1" max="1" step="0.25" value="0">
+      <small>Truthworthiness: <span id="truthworthiness_score_value">0</span></small>
+    </div>
+
+    <div class="mb-3">
+      <label for="sentiment_score" class="form-label">Neutrality</label>
+      <input type="range" class="form-range" id="sentiment_score" name="sentiment_score" min="-1" max="1" step="0.25" value="0">
+      <small>Neutrality: <span id="sentiment_score_value">Neutral</span></small>
+    </div>
+
+    <div class="mb-3">
+      <label for="conciseness_score" class="form-label">Conciseness</label>
+      <input type="range" class="form-range" id="conciseness_score" name="conciseness_score" min="-1" max="1" step="0.25" value="0">
+      <small>Conciseness: <span id="conciseness_score_value">0</span></small>
+    </div>
+
+    <div class="mb-3">
+      <label for="readability_score" class="form-label">Readability</label>
+      <input type="range" class="form-range" id="readability_score" name="readability_score" min="-1" max="1" step="0.25" value="0">
+      <small>Readability: <span id="readability_score_value">0</span></small>
+    </div>
+
+    <div class="mb-3">
+      <label for="transparency_score" class="form-label">Transparency</label>
+      <input type="range" class="form-range" id="transparency_score" name="transparency_score" min="-1" max="1" step="0.25" value="0">
+      <small>Transparency: <span id="transparency_score_value">0</span></small>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-4">Submit Grades</button>
+  </form>
+</div>
+{% endblock %}

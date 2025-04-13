@@ -1,0 +1,72 @@
+services:
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb-container
+    env_file:
+      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb-data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    restart: always
+    networks:
+      - backend
+    cpus: 1
+    mem_limit: '0.95g'
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.7.0
+    container_name: elasticsearch-container
+    env_file:
+      - .env
+    environment:
+      - discovery.type=single-node
+      - ELASTICSEARCH_JAVA_OPTS=-Xmx1.3g -Xms1.3g
+      - xpack.security.enabled=false
+    ports: 
+      - "9200:9200"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    restart: always
+    networks:
+      - backend
+    cpus: 1
+    mem_limit: '1.3g'
+
+  fastapi:
+    build: ./
+    container_name: fastapi-container
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mariadb
+      - elasticsearch
+    env_file:
+      - .env
+    volumes:
+      - ./app:/app
+      - ./app/static:/app/static:ro
+    restart: always
+    networks:
+      - backend
+      - web
+    mem_limit: '1.25g'
+    cpus: 2
+    user: fastapi-user
+    command: ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "main:app", "-b", "0.0.0.0:8000", "-w", "2"]
+    
+networks:
+  backend:
+    driver: bridge
+    internal: true
+  web:
+    driver: bridge
+volumes:
+  mariadb-data:
+  elasticsearch-data:

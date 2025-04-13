@@ -1,0 +1,309 @@
+/* ========= Global Styles ========= */
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f3f9; /* Soft pastel purple background */
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    flex: 1;
+    font-size: 1rem;
+}
+
+#addSourceButton {
+    margin-left: 5px;
+}
+
+/* ========= Card Components ========= */
+.card {
+    background-color: #ffffff; /* White card background */
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    margin-bottom: 20px;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.card-body {
+    padding: 24px;
+}
+
+.card-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #6b4f96; /* Pastel purple */
+}
+
+.card-text {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: #6b7280; /* Soft gray */
+}
+
+/* ========= Buttons ========= */
+.btn {
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #9b4f88; /* Pastel purple */
+    color: #fff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #7c376b; /* Darker purple */
+}
+
+.btn-danger {
+    background-color: #9b4f88;
+    color: #fff;
+}
+
+a {
+    color:  #bd60a6;
+}
+
+.btn-danger:hover {
+    background-color: #864275;
+}
+
+.btn-secondary {
+    background-color: #fff; /* Light purple */
+    color: #9b4f88;
+}
+
+.btn-secondary:hover {
+    background-color: #9b4f88;
+}
+
+/* ========= Form Elements ========= */
+form {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+    max-width: 800px;
+    margin: auto;
+}
+
+form .form-label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #6b4f96; /* Pastel purple */
+}
+
+.form-range {
+    width: 100%;
+    accent-color: #9b4d96; /* Pastel purple accent */
+}
+
+form small {
+    color: #6b7280; /* Soft gray */
+}
+
+/* ========= Sidebar ========= */
+.sidebar {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+    height: 100vh;
+    overflow-y: auto;
+    position: sticky;
+    top: 0;
+}
+
+.slider-section {
+    margin-bottom: 24px;
+}
+
+.slider-section h5 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #6b4f96; /* Pastel purple */
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.slider-section small {
+    font-size: 0.85rem;
+    color: #6b7280; /* Soft gray */
+}
+
+.slider-section span {
+    font-weight: bold;
+    color: #4b5563; /* Dark gray */
+}
+
+/* ========= Search Input & Filters ========= */
+.search-container {
+    margin-bottom: 24px;
+}
+
+#searchBar {
+    height: 44px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb; /* Light gray border */
+    padding: 0 12px;
+    font-size: 1rem;
+    background-color: #f3f4f6; /* Very light gray */
+}
+
+.category-container {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.category-container select {
+    padding: 10px;
+    font-size: 0.95rem;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb; /* Light gray border */
+    background-color: #f3f4f6; /* Very light gray */
+}
+
+/* ========= Result Area ========= */
+#resultContainer {
+    margin-top: 20px;
+}
+
+/* ========= Enhanced Search Result Card ========= */
+.search-result-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+    border-left: 6px solid #9b4d96; /* Pastel purple left border */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.search-result-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.search-result-card h5 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #4b5563; /* Dark gray */
+    margin-bottom: 10px;
+}
+
+.search-result-card p {
+    font-size: 0.97rem;
+    color: #6b7280; /* Soft gray */
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+.search-result-meta {
+    font-size: 0.85rem;
+    color: #9ca3af; /* Light gray */
+    margin-top: 10px;
+}
+
+.search-result-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    background-color: #f3f4f6; /* Very light gray */
+    color: #9b4d96; /* Pastel purple */
+    padding: 4px 8px;
+    border-radius: 6px;
+    margin-right: 6px;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* ========= Accent Utilities ========= */
+.text-accent {
+    color: #9b4d96; /* Pastel purple */
+}
+
+.bg-accent {
+    background-color: #f3f4f6; /* Very light gray */
+}
+
+/* ========= Responsive ========= */
+@media (max-width: 767px) {
+    .sidebar {
+        position: relative;
+        height: auto;
+    }
+
+    .col-md-3, .col-md-9 {
+        width: 100%;
+        padding: 0;
+    }
+
+    .category-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .category-container select {
+        width: 100%;
+    }
+
+    form {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+    }
+
+    .search-result-card {
+        padding: 20px;
+    }
+
+    .search-result-card h5 {
+        font-size: 1.15rem;
+    }
+}
+
+
+/* Custom Purple Theme */
+.bg-purple {
+    background-color: #9b4f88 !important; /* Pastel purple */
+}
+
+.text-purple {
+    color: #9b4f88; /* Pastel purple text */
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    background-color: #9b4f88;
+    color: white;
+    padding: 15px 0;
+}
+
+footer {
+    background-color: #9b4d96; /* Purple background */
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+}
