@@ -23,14 +23,17 @@ async def submit_authority_request(
     pool: aiomysql.Pool = Depends(create_pool)
 ):
     try:
-        print("1")
+
         user_id = auth_service.is_authenticated(request)
         now = datetime.now(timezone.utc)
-        print("2")
+        
         recent = await most_recent_authority_rq(pool, user_id, title)
-        print("3")
+        
         if recent:
             last_timestamp = recent[0]
+            if last_timestamp and last_timestamp.tzinfo is None:
+                last_timestamp = last_timestamp.replace(tzinfo=timezone.utc)
+
             if last_timestamp and (now - last_timestamp).days < 30:
                 return templates.TemplateResponse("authority.html", {
                     "request": request,
