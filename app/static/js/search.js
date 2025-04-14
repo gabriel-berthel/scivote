@@ -19,7 +19,7 @@ function fetchData(event) {
         top_k: selected_k
     };
 
-    fetch('http://localhost:8000/api/search/', {
+    fetch('/api/search/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -114,11 +114,18 @@ function displayResults(results) {
     }
 }
 
-searchBar.addEventListener('keypress', function(event) {
+searchBar.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
-        fetchData(event); 
+	event.preventDefault();
+        fetchData(event);
     }
 });
+
+searchButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    fetchData(event);
+});
+
 
 function calculateFinalScore(item, baseScoreWeight, recencyWeight, authorityWeight, truthworthinessWeight, sentimentWeight, concisenessWeight, readabilityWeight, transparencyWeight) {
     return (
